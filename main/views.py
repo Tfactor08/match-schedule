@@ -1,10 +1,7 @@
 from django.shortcuts import render
+
 from .models import Match, League
-
-import sys
-sys.path.insert(0, "D:\Python\Parsing\MatchesParser")
-from parser_main import MatchParser
-
+from .parser import main
 
 def index(request):
 
@@ -18,10 +15,10 @@ def index(request):
 
 def matches(request, league):
 
-    matchParser = MatchParser(league)
+    matchParser = main.MatchParser(league)
     matches = matchParser.parse()
-
-    if matches[-1]['date'] == None:
+    print(matches[-1]['date'])
+    if matches[1]['date'] == None:
         Match.objects.all().delete()
         for match in matches:
             Match.objects.create(first_team=match['teams'][0], second_team=match['teams'][1],
