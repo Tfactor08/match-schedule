@@ -17,7 +17,6 @@ def matches(request, league):
 
     matchParser = main.MatchParser(league)
     matches = matchParser.parse()
-    print(matches[-1]['date'])
     if matches[0]['date'] == None:
         Match.objects.all().delete()
         for match in matches:
