@@ -1,17 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ match }}</title>
-</head>
-<body>
-    <h1>{{ match }}</h1>
-    {% if match.date %}
-        <h2>{{ match.date }}</h2>
-        <h3>{{ match.time }}</h3>
-    {% else %}
-        <h2>Окончен</h2>
-    {% endif %}    
-</body>
-</html>
+{% extends 'main/base.html' %}
+
+{% block title %}
+{{ match }}
+{% endblock %}
+
+{% block content %}
+<h1>{{ match }}</h1>
+{% if match.date %}
+    <h2>{{ match.date }}</h2>
+    <h3>{{ match.time }}</h3>
+{% else %}
+    <h2>Окончен</h2>
+{% endif %}
+{% endblock %}

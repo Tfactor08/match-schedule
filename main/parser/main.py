@@ -2,9 +2,9 @@
 from bs4 import BeautifulSoup
 
 class MatchParser:
+    URL = None
 
     def __init__(self, league):
-        self.URL = None
         self.HEADERS = {
             'user-agent': 'Mozilla/5.0 (Windows NT 6.1; rv:86.0) Gecko/20100101 Firefox/86.0',
             'accept': '*/*' }
@@ -30,7 +30,7 @@ class MatchParser:
         if html.status_code == 200:
             soup = BeautifulSoup(html.content, 'html.parser')
             tables = soup.findAll('table', {'class': 'KAIX8d'})
-            
+
             matches = []
             for table in tables:
                 teams = []

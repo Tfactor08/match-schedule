@@ -17,7 +17,7 @@ def matches(request, league):
 
     matchParser = main.MatchParser(league)
     matches = matchParser.parse()
-    if matches[0]['date'] == None:
+    if matches[-1]['date'] != None:
         Match.objects.all().delete()
         for match in matches:
             Match.objects.create(first_team=match['teams'][0], second_team=match['teams'][1],

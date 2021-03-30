@@ -1,13 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Расписание матчей</title>
-</head>
-<body>
-    {% for match in matches %}
-        <a href="{% url 'detail' match.id %}">{{ match }}</a><br>
-    {% endfor %}
-</body>
-</html>
+{% extends 'main/base.html' %}
+
+{% load static %}
+
+{% block title %}
+Расписание матчей
+{% endblock %}
+
+{% block content %}
+{% for match in matches %}
+    <a href="{% url 'detail' match.id %}">{{ match }}</a><br>
+{% endfor %}
+{% endblock %}
