@@ -2,6 +2,8 @@ from django.shortcuts import render
 
 from .models import Match, League
 from .parser import main
+from .services.parser_service import update_data, is_data_relevant
+
 
 def index(request):
 
@@ -15,13 +17,8 @@ def index(request):
 
 def matches(request, league):
 
-    matchParser = main.MatchParser(league)
-    matches = matchParser.parse()
-    if matches[-1]['date'] != None:
-        Match.objects.all().delete()
-        for match in matches:
-            Match.objects.create(first_team=match['teams'][0], second_team=match['teams'][1],
-                                    date=match['date'], time=match['time'], league=league)
+    if not is_data_relevant(league):
+        update_data(league)
 
     context = {
         'matches': Match.objects.filter(league=league)
